@@ -10,7 +10,7 @@ function writeCode(prefix,code,fn){
     domCode.scrollTop = domCode.scrollHeight;
     if(n >= code.length){
       window.clearInterval(id);
-      fn.call();
+      fn && fn.call();
     }
   },10);
 }
@@ -24,7 +24,7 @@ function whiteMarkdown(markdown,fn){
     dompaper.scrollTop = dompaper.scrollHeight;
     if(n >= markdown.length){
       window.clearInterval(id);
-      fn.call();
+      fn && fn.call();
     }
   },10);
 }
@@ -139,21 +139,5 @@ function createPaper(fn){
   content.className = "content";
   paper.appendChild(content);
   document.body.appendChild(paper);
-  fn.call()
-}
-
-function fn3(preResult){
-  var n = 0;
-  var id = setInterval(() =>{
-    n +=1;
-    code.innerHTML = preResult + result.substring(0,n);
-    code.innerHTML = 
-    Prism.highlight(code.innerHTML, Prism.languages.css);
-
-    styleTag.innerHTML = preResult + result.substring(0,n);
-    if(n >= result.length){
-      window.clearInterval(id);
-    }
-
-  },10);
+  fn && fn.call()
 }
